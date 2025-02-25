@@ -2,22 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Vehicle;
+use App\Models\Discount;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class VehicleSeeder extends Seeder
+class DiscountSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Vehicle::create([
-            'ppu' => 'TEST',
-            'make' => 'JAC',
-            'Model' => 'TEST',
-            'Capacity' => 14
+        Discount::create([
+            'code' => 'TEST',
+            'currency' => 40000,
+            'status' => 1 
         ]);
     }
 }

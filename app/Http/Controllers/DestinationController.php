@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\Tour;
 use Illuminate\Http\Request;
 
 class DestinationController extends Controller
@@ -12,12 +13,12 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        //
+        $destinations = Destination::all();
+
+        return view('admin.destination.index', compact('destinations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
@@ -28,7 +29,16 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $prefixSeparator = explode(' ', $request->name);
+        $prefix = '';
+        for ($i=0; $i < count($prefixSeparator); $i++) { 
+            $prefix = $prefix . $prefixSeparator[$i][0];
+        }
+        $request['prefix'] = $prefix;
+
+        Destination::create($request->all());
+
+       return  redirect()->route('destination.index');
     }
 
     /**
@@ -36,7 +46,10 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+
+        $tours = Tour::where('destination_id', $destination->id)->get();
+
+        return view('admin.destination.show', compact('destination', 'tours'));
     }
 
     /**

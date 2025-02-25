@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('run');
+            $table->string('run');
+            $table->string('email')->nullable();
             $table->string('residence');
-            $table->integer('phone');
+            $table->string('phone');
             $table->timestamps();
         });
     }

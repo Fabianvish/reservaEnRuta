@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('destinations', function (Blueprint $table) {
@@ -16,16 +14,18 @@ return new class extends Migration
             $table->string('name');
             $table->string('source');
             $table->string('destination');
+            $table->string('prefix')->unique();
             $table->float('kms');
+            $table->integer('adult_price');
+            $table->integer('children_price');
+            $table->integer('third_age_price');
             $table->string('start');
             $table->string('end');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('destinations');
