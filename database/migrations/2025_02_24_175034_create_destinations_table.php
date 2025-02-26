@@ -12,8 +12,8 @@ return new class extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('source');
-            $table->string('destination');
+            $table->string('origin');
+            $table->string('tour_location');
             $table->string('prefix')->unique();
             $table->float('kms');
             $table->integer('adult_price');

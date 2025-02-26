@@ -13,18 +13,22 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/admin', function () {
         return view('dashboard');
     })->name('dashboard');
 
-Route::get('/destination', [DestinationController::class,'index'])->name('destination.index');
-Route::get('/destination/show/{destination}', [DestinationController::class,'show'])->name('destination.show');
-Route::post('/destination/store', [DestinationController::class,'store'])->name('destination.store');
+Route::get('/admin/destination', [DestinationController::class,'index'])->name('destination.index');
+Route::get('/admin/destination/create', [DestinationController::class,'create'])->name('destination.create');
+Route::get('/admin/destination/edit/{destination}', [DestinationController::class,'edit'])->name('destination.edit');
+Route::get('/admin/destination/show/{destination}', [DestinationController::class,'show'])->name('destination.show');
 
-Route::get('/tour', [TourController::class,'index'])->name('tour.index');
-Route::get('/tour/store', [TourController::class,'store'])->name('tour.store');
-Route::get('/reservation', [ReservationController::class,'index'])->name('reservation.index');
-Route::get('/reservation/show/{reservation}', [ReservationController::class,'show'])->name('reservation.show');
-Route::get('/reservation/store', [ReservationController::class,'store'])->name('reservation.store');
+Route::get('/admin/tour', [TourController::class,'index'])->name('tour.index');
+Route::get('/admin/tour/create', [TourController::class,'create'])->name('tour.create');
+Route::get('/admin/tour/edit/{tour}', [TourController::class,'edit'])->name('tour.edit');
+Route::get('/admin/tour/show/{tour}', [TourController::class,'show'])->name('tour.show');
+
+Route::get('/admin/reservation', [ReservationController::class,'index'])->name('reservation.index');
+Route::get('/admin/reservation/create', [ReservationController::class,'create'])->name('reservation.create');
+Route::get('/admin/reservation/show/{reservation}', [ReservationController::class,'show'])->name('reservation.show');
 
 });

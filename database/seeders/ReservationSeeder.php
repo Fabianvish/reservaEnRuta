@@ -25,9 +25,9 @@ class ReservationSeeder extends Seeder
             'passenger_id' => 1,
             'status' => 0,
             'payment_method' => "EFECTIVO",
-            'currency' => 60000,
+            'currency' => 300000,
             'children_count' => 0,
-            'adult_count' => 1,
+            'adult_count' => 5,
             'third_age_count' => 0,
         ]);
     }

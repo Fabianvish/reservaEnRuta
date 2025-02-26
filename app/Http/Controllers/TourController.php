@@ -39,7 +39,15 @@ class TourController extends Controller
      */
     public function show(Tour $tour)
     {
-        //
+        $reservations = Reservation::where('tour_id', $tour->id)->get();
+        $consumption = $tour->destination->kms / $tour->vehicle->consumption * 1300;
+        $revenue = 0;
+        foreach ($reservations as $key => $reservation) {
+            $revenue = $reservation->currency + $revenue;
+        }
+        $total = $revenue - $tour->tour_guide_salary - $tour->chauffeur_salary - $consumption;
+
+        return view('admin.tour.show', compact('tour','reservations','consumption', 'total', 'revenue'));
     }
 
     /**

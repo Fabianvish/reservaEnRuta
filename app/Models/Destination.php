@@ -7,13 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Destination extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['name', 'origin', 'tour_location', 'kms', 'start', 'end', 'adult_price', 'children_price', 'third_age_price', 'prefix' ];
 
-    /**
-     * Get all of the comments for the Destination
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function tours(): HasMany
     {
         return $this->hasMany(Tour::class);

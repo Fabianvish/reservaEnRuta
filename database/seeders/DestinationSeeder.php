@@ -15,10 +15,10 @@ class DestinationSeeder extends Seeder
     {
         Destination::create([
             'name' => 'Full Day Torres del Paine',
-            'source' => 'General del Canto 01250, Punta Arenas',
-            'destination' => 'Reserva Nacional Torres del Paine',
+            'origin' => 'General del Canto 01250, Punta Arenas',
+            'tour_location' => 'Reserva Nacional Torres del Paine',
             'prefix' => 'FDTDP',
-            'kms' => 340,
+            'kms' => 450,
             'adult_price' => 60000,
             'children_price' => 40000,
             'third_age_price' => 40000,

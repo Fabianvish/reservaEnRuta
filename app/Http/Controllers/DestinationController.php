@@ -21,7 +21,7 @@ class DestinationController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.destination.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class DestinationController extends Controller
      */
     public function edit(Destination $destination)
     {
-        //
+        return view('admin.destination.edit', compact('destination'));
     }
 
     /**

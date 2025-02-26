@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('model');
             $table->string('make');
             $table->integer('capacity');
+            $table->float('consumption');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

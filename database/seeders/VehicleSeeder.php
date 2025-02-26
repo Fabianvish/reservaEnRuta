@@ -16,8 +16,9 @@ class VehicleSeeder extends Seeder
         Vehicle::create([
             'ppu' => 'TEST',
             'make' => 'JAC',
-            'Model' => 'TEST',
-            'Capacity' => 14
+            'model' => 'TEST',
+            'consumption' => 20,
+            'capacity' => 14
         ]);
     }
 }
