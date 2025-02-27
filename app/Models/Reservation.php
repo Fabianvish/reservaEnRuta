@@ -7,11 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reservation extends Model
 {
-    /**
-     * Get the user that owns the Reservation
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+    protected $fillable = ['reservation_code', 'tour_id','passenger_id','payment_method','currency','children_count','adult_count','third_age_count'];
+
     public function tour(): BelongsTo
     {
         return $this->belongsTo(Tour::class);

@@ -57,7 +57,7 @@
                         {{$reservation->third_age_count }}
                     </td>
                     <td class="px-6 py-4">
-                        {{$reservation->status ? 'Pagado' : 'Impago'}}
+                        {{$reservation->status ? 'Activa' : 'Anulada'}}
                     </td>
                     <td class="px-6 py-4">
                         {{$reservation->payment_method}}
