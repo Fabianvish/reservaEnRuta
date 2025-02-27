@@ -25,7 +25,7 @@
                     <td class="px-6 py-4">
                         @forelse ($reservations as $reservation)
                             @if ($reservation->tour_id == $tour->id)
-                                {{ $tour->vehicle->capacity = $tour->vehicle->capacity - 1 }}
+                                {{ $tour->vehicle->capacity = $tour->vehicle->capacity - $reservation->adult_count - $reservation->children_count - $reservation->third_age_count }}
                             @endif
                         @empty
                             {{ $tour->vehicle->capacity }}
