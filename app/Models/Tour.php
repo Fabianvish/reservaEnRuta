@@ -14,7 +14,7 @@ class Tour extends Model
      */
     public function destination(): BelongsTo
     {
-        return $this->belongsTo(Destination::class);
+        return $this->belongsTo(Destination::class)->withDefault('adult_price',0)->withDefault('children_price', 0)->withDefault('third_age_price', 0);
     }
 
     public function vehicle(): BelongsTo

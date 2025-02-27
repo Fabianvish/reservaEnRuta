@@ -23,15 +23,7 @@ class TourController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('admin.tour.create');
     }
 
     /**
@@ -40,7 +32,7 @@ class TourController extends Controller
     public function show(Tour $tour)
     {
         $reservations = Reservation::where('tour_id', $tour->id)->get();
-        $consumption = $tour->destination->kms / $tour->vehicle->consumption * 1300;
+        $consumption = $tour->destination->kms / $tour->vehicle->consumption * 1300 * 2;
         $revenue = 0;
         foreach ($reservations as $key => $reservation) {
             $revenue = $reservation->currency + $revenue;

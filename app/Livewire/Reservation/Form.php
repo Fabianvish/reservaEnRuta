@@ -16,7 +16,11 @@ class Form extends Component
     public function mount(Reservation $reservation){
 
         $this->reservation_code = $reservation->reservation_code;
-        $this->tour_id = $reservation->tour_id;
+        if ($this->reservation) {
+            $this->tour_id = $reservation->tour_id;
+        }else{
+            $this->tour_id = 1;
+        }
         $this->passenger_id = $reservation->passenger_id;
         $this->status = $reservation->status;
         $this->payment_method = $reservation->payment_method;
@@ -37,11 +41,24 @@ class Form extends Component
 
     }
 
+    public function saveOrUpdate(){
+        $data = $this->all();
+        $passenger = Passenger::where('run', $this->run)->first();
+        $this->passenger_id = $passenger->id;
+
+        $data['passenger_id'] = $this->passenger_id;
+
+        dd($data);
+    }
+
 
     public function render()
     {
         $tours = Tour::where('status', 1)->get();
+        $tour = Tour::find($this->tour_id);
 
+
+        $this->currency = $tour->destination->adult_price*$this->adult_count + $tour->destination->children_price * $this->children_count + $tour->destination->third_age_price * $this->third_age_count;
         return view('livewire.reservation.form', compact('tours'));
     }
 }

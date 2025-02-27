@@ -16,13 +16,18 @@ return new class extends Migration
             $table->string('reservation_code');
             $table->foreignId('tour_id');
             $table->foreignId('passenger_id');
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->string('payment_method');
             $table->integer('currency');
             $table->integer('children_count');
             $table->integer('adult_count');
             $table->integer('third_age_count');
             $table->timestamps();
+
+
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
+            $table->foreign('passenger_id')->references('id')->on('passengers')->onDelete('cascade');
+
         });
     }
 
