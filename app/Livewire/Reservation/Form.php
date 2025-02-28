@@ -5,13 +5,12 @@ namespace App\Livewire\Reservation;
 use App\Models\Passenger;
 use App\Models\Reservation;
 use App\Models\Tour;
-use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Form extends Component
 {
-    public $reservation, $data, $methods = ['EFECTIVO', 'CUPON DE PAGO'];
+    public $reservation, $data, $selectedTour,$avaiable, $methods = ['EFECTIVO', 'CUPON DE PAGO'];
     #[Validate()]
     public $run, $name, $residence, $email, $phone;
     public $adult_price, $children_price, $third_age_price;
@@ -19,33 +18,27 @@ class Form extends Component
 
     public function mount(Reservation $reservation)
     {
-
         $this->reservation_code = $reservation->reservation_code;
-        if ($this->reservation) {
-            $this->tour_id = $reservation->tour_id;
-        } else {
-            $this->tour_id = 1;
-
-            $activeTour = Tour::where('status', 1)->first();
-            $this->tour_id = $activeTour->id;
-        }
         $this->passenger_id = $reservation->passenger_id;
         $this->status = $reservation->status;
         $this->payment_method = $reservation->payment_method;
         $this->payment_method = "efectivo";
         if ($this->reservation) {
+            $this->tour_id = $reservation->tour_id;
             $this->currency = $reservation->currency;
             $this->children_count = $reservation->children_count;
             $this->adult_count = $reservation->adult_count;
             $this->third_age_count = $reservation->third_age_count;
         } else {
+            $this->selectedTour = Tour::where('status', 1)->orderBy('date','desc')->first();
+            $this->tour_id = $this->selectedTour->id;
+            $this->updatedTourId();
             $this->currency = 0;
             $this->children_count = 0;
             $this->adult_count = 0;
             $this->third_age_count = 0;
         }
     }
-
 
     public function rules()
     {
@@ -63,11 +56,17 @@ class Form extends Component
         ];
     }
 
+    public function updatedTourId(){
+        $this->selectedTour = Tour::find($this->tour_id);
+        $this->avaiable = 0;
+        foreach($this->selectedTour->reservations as $key => $reservation){
+            $this->avaiable = $this->avaiable + $reservation->children_count + $reservation->adult_count + $reservation->third_age_count;
+        }
+    }
+
     public function createPassenger()
     {
-
         $passenger = Passenger::create($this->data);
-
         $this->passenger_id = $passenger->id;
         $this->data['passenger_id'] = $this->passenger_id;
     }
@@ -91,7 +90,6 @@ class Form extends Component
     public function saveOrUpdate()
     {
         $this->validate();
-
         $this->data = $this->all();
         $this->createPassenger();
         if (!$this->reservation) {
@@ -105,9 +103,7 @@ class Form extends Component
     {
         $tours = Tour::where('status', 1)->get();
         $tour = Tour::find($this->tour_id);
-
-        $this->currency = $tour->destination->adult_price * $this->adult_count + $tour->destination->children_price * $this->children_count + $tour->destination->third_age_price * $this->third_age_count;
-
+        // $this->currency = $tour->destination->adult_price * $this->adult_count + $tour->destination->children_price * $this->children_count + $tour->destination->third_age_price * $this->third_age_count;
         $this->adult_price = $tour->destination->adult_price * $this->adult_count;
         $this->children_price = $tour->destination->children_price * $this->children_count;
         $this->third_age_price = $tour->destination->third_age_price * $this->third_age_count;

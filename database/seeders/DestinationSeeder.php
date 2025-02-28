@@ -24,6 +24,18 @@ class DestinationSeeder extends Seeder
             'third_age_price' => 40000,
             'start' => '05:00',
             'end' => '22:30',
+        ]);
+        Destination::create([
+            'name' => 'Full Day Pinguino Rey',
+            'origin' => 'General del Canto 01250, Punta Arenas',
+            'tour_location' => 'Pinguino Rey',
+            'prefix' => 'FDPR',
+            'kms' => 450,
+            'adult_price' => 100000,
+            'children_price' => 70000,
+            'third_age_price' => 70000,
+            'start' => '05:00',
+            'end' => '22:30',
 
         ]);
     }

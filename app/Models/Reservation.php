@@ -18,4 +18,5 @@ class Reservation extends Model
     {
         return $this->belongsTo(Passenger::class);
     }
+
 }

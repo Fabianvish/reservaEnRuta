@@ -21,5 +21,13 @@ class TourSeeder extends Seeder
             'vehicle_id' => 1,
             'status' => 1,
         ]);
+        Tour::create([
+            'date' => '2025-03-01',
+            'destination_id' => 2,
+            'chauffeur_salary' => 100000,
+            'tour_guide_salary' => 90000,
+            'vehicle_id' => 1,
+            'status' => 1,
+        ]);
     }
 }
